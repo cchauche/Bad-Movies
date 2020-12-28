@@ -304,6 +304,8 @@ class App extends React.Component {
 
     // you might have to do something important here!
     this.swapFavorites = this.swapFavorites.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
   getMovies() {
@@ -312,10 +314,12 @@ class App extends React.Component {
 
   saveMovie() {
     // same as above but do something diff
+    console.log('Saving a movie...')
   }
 
   deleteMovie() {
     // same as above but do something diff
+    console.log('Deleting a movie...')
   }
 
   swapFavorites() {
@@ -332,7 +336,7 @@ class App extends React.Component {
 
         <div className="main">
           <Search swapFavorites={this.swapFavorites} showFaves={this.state.showFaves}/>
-          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
+          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves} saveMovie={this.saveMovie} deleteMovie={this.deleteMovie} />
         </div>
       </div>
     );
