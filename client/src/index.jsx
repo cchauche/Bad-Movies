@@ -303,6 +303,7 @@ class App extends React.Component {
     };
 
     // you might have to do something important here!
+    this.swapFavorites = this.swapFavorites.bind(this);
   }
 
   getMovies() {
