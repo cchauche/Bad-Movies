@@ -1,14 +1,16 @@
 const request = require('request');
-const axios = require('axios');
+const axios = require('axios').default;
 const { API_KEY } = require('../../config.js');
 
 // write out logic/functions required to query TheMovieDB.org
-const discoverURL = 'https://api.themoviedb.org/3/discover/movie';
-const genreURL = 'https://api.themoviedb.org/3/genre/movie/list';
+const discoverURL = 'https://api.themoviedb.org/3/discover/movie' + '?api_key=' + API_KEY;
+const genreURL = 'https://api.themoviedb.org/3/genre/movie/list' + '?api_key=' + API_KEY;
 
 const getTMDBGenres = () => {
   // Get  list of genres from API
-  // Return a list of genres with their ids?
+  return axios.get(genreURL).then((response) => {
+    return response.data.genres;
+  })
 }
 
 const getWorstOfGenre = (genreId) => {
@@ -21,3 +23,6 @@ const getWorstOfGenre = (genreId) => {
 // Get your API Key and save it in your config file
 
 // Don't forget to export your functions and require them within your server file
+module.exports = {
+  getTMDBGenres, getWorstOfGenre
+}
