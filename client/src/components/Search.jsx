@@ -83,15 +83,20 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      //todo: How do we get values in here to start out with?
       genres: dummyGenres,
       selectValue: ''
     };
   }
+
+  //todo: do we need an 'oncomponent load function to get genres and set selectValue?
+
   getGenres() {
-    //make an axios request in this component to get the list of genres from your endpoint GET GENRES
+    //todo: make an axios request in this component to get the list of genres from your endpoint GET GENRES
   }
 
   handleChange(event) {
+    // todo: remove this console log when done with component
     console.log('New selection: ', event.target.value);
     this.setState({
       selectValue: event.target.value
@@ -110,16 +115,9 @@ class Search extends React.Component {
             return (<option value={genre.id} key={genre.id}>{genre.name}</option>)
           })}
         </select>
-        {/* How can you tell which option has been selected from here? */}
-
-        {/* <select>
-          <option value="1">Colin</option>
-          <option value="thisway">This Way</option>
-          <option value="thatway">That Way</option>
-        </select> */}
         <br/><br/>
 
-        <button>Search</button>
+        <button onClick={() => {this.props.getMovies(this.state.selectValue)}}>Search</button>
 
       </div>
     );
