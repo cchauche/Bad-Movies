@@ -263,7 +263,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: dummyMovies,
+      movies: [],
       favorites: dummyFaves,
       showFaves: false,
     };
@@ -282,7 +282,7 @@ class App extends React.Component {
       .get("http://localhost:3000/movies/search", { params })
       .then((response) => {
         this.setState({
-          movies: response.data
+          movies: response.data,
         });
       })
       .catch((err) => {
@@ -290,14 +290,31 @@ class App extends React.Component {
       });
   }
 
-  saveMovie() {
+  saveMovie(movieIndex) {
     // same as above but do something diff
     console.log("Saving a movie...");
+    let movie = this.state.movies[movieIndex];
+    axios
+      .post("http://localhost:3000/movies/save", movie)
+      .then(() => {
+        console.log(`${movie.title} saved to favorites`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
-  deleteMovie() {
+  deleteMovie(movieId) {
     // same as above but do something diff
     console.log("Deleting a movie...");
+    axios
+      .delete("http://localhost:3000/movies/delete/" + movieId)
+      .then(() => {
+        console.log("Movie deleted from favorites");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   swapFavorites() {
