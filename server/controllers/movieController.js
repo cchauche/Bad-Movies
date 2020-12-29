@@ -40,6 +40,20 @@ module.exports = {
 
     // send back
   },
-  saveMovie: (req, res) => {},
-  deleteMovie: (req, res) => {},
+  saveMovie: (req, res) => {
+    let movie = req.body;
+    movieModel.addFavorite(movie, (err) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(406);
+      } else {
+        res.sendStatus(201);
+      }
+    })
+  },
+  deleteMovie: (req, res) => {
+    console.log('Deleting Movie...');
+    console.log(req.params);
+    res.sendStatus(200);
+  },
 };
