@@ -31,6 +31,10 @@ module.exports = {
         callback(null);
       }
     })
-  }
+  },
 
+  //todo: Write function that queries the DB for all the favorites
+  getFavorites: () => {
+    // Get all the favorites from DB
+  }
 }
