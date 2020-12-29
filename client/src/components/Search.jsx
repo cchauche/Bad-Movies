@@ -31,8 +31,6 @@ class Search extends React.Component {
   }
 
   handleChange(event) {
-    // todo: remove this console log when done with component
-    console.log("New selection: ", event.target.value);
     this.setState({
       selectValue: event.target.value,
     });
