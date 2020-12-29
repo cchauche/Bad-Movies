@@ -63,10 +63,14 @@ module.exports = {
     })
   },
 
-  //todo: Write controller that sends back all the favorites from db
   getFavorites: (req, res) => {
-    //Send back all favorites
-    console.log('Getting all the favorites...');
-    res.sendStatus(200);
+    movieModel.getFavorites((err, favorites) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(406);
+      } else {
+        res.status(200).json(favorites);
+      }
+    })
   },
 };
