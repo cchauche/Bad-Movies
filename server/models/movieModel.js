@@ -7,4 +7,21 @@ const sqlDb = require('../../db/sql');
 
 module.exports = {
 
+  addFavorite: ({id, title, poster_path, release_date, vote_average}, callback) => {
+    sqlQuery = 'INSERT INTO favorites (movie_id, title, poster_path, release_date, vote_average) VALUES (?,?,?,?,?)';
+    sqlValues = [id, title, poster_path, release_date, vote_average];
+    sqlDb.query(sqlQuery, sqlValues, (err) => {
+      if (err) {
+        callback(err);
+        return;
+      } else {
+        callback(null);
+      }
+    })
+  },
+
+  deleteFavorite: (movieId) => {
+
+  }
+
 }
