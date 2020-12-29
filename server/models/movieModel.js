@@ -3,7 +3,8 @@
 //For SQL
 // const sqlDb = require("../../db/sql");
 //For Mongo
-const mongoDb = require('../../db/mongodb')
+const mongoose = require('mongoose');
+const mongoDb = require('../../db/mongodb');
 
 
 /**
@@ -57,12 +58,27 @@ const mongoDb = require('../../db/mongodb')
  * MongoDB MODELS
  * *******************************************
  */
+
+const movieSchema = new mongoose.Schema({
+  id: {type: Number, required: true},
+  title: String,
+  poster_path: String,
+  release_date: String,
+  vote_average: Number
+})
+
+const FavoriteModel = mongoose.model('Favorite', movieSchema);
+
+//todo: Left of here need to try and add a movie to favorites
 module.exports = {
-  addFavorite: (
-    { id, title, poster_path, release_date, vote_average },
-    callback
-  ) => {
+  addFavorite: (movie, callback) => {
     //Add new movie to favorites
+    FavoriteModel.create(movie, (err) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null);
+    })
   },
 
   deleteFavorite: (movieId, callback) => {
