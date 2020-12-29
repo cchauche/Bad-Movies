@@ -20,8 +20,17 @@ module.exports = {
     })
   },
 
-  deleteFavorite: (movieId) => {
-
+  deleteFavorite: (movieId, callback) => {
+    sqlQuery = 'DELETE FROM favorites WHERE movie_id=?';
+    sqlValues = [movieId];
+    sqlDb.query(sqlQuery, sqlValues, (err) => {
+      if (err) {
+        callback(err);
+        return;
+      } else {
+        callback(null);
+      }
+    })
   }
 
 }
