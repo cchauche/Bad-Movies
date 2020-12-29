@@ -52,8 +52,14 @@ module.exports = {
     })
   },
   deleteMovie: (req, res) => {
-    console.log('Deleting Movie...');
-    console.log(req.params);
-    res.sendStatus(200);
+    let movieId = req.params.id;
+    movieModel.deleteFavorite(movieId, (err) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(406);
+      } else {
+        res.sendStatus(200);
+      }
+    })
   },
 };
