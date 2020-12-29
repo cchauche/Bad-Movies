@@ -58,13 +58,15 @@ class App extends React.Component {
   }
 
   saveMovie(movieIndex) {
-    //todo: modify so after succesfully adding a movie it adds that movie to favorites
-    // same as above but do something diff
     console.log("Saving a movie...");
     let movie = this.state.movies[movieIndex];
     axios
       .post("http://localhost:3000/movies/save", movie)
       .then(() => {
+        let updatedFaves = [...this.state.favorites, movie];
+        this.setState({
+          favorites: updatedFaves
+        })
         console.log(`'${movie.title}' saved to favorites`);
       })
       .catch((err) => {
