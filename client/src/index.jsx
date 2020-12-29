@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import $ from "jquery";
 import axios from "axios";
 // import AnyComponent from './components/filename.jsx'
 import Search from "./components/Search.jsx";
@@ -15,7 +14,6 @@ class App extends React.Component {
       showFaves: false,
     };
 
-    // you might have to do something important here!
     this.swapFavorites = this.swapFavorites.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
     this.deleteMovie = this.deleteMovie.bind(this);
@@ -36,7 +34,6 @@ class App extends React.Component {
   }
 
   getMovies(genreId) {
-    // make an axios request to your server on the GET SEARCH endpoint
     let params = { genre_id: genreId };
     axios
       .get("http://localhost:3000/movies/search", { params })
@@ -75,13 +72,15 @@ class App extends React.Component {
   }
 
   deleteMovie(movieId) {
-    // same as above but do something diff
-    //todo: modify so after succesfully deleting a movie it removes that movie from favorites
     console.log("Deleting a movie...");
     axios
       .delete("http://localhost:3000/movies/delete/" + movieId)
       .then(() => {
-        console.log("Movie deleted from favorites");
+        let favorites = this.state.favorites.slice();
+        let removeInd = favorites.findIndex(movie => movieId === movie.id);
+        let [movie] = favorites.splice(removeInd, 1);
+        this.setState({favorites})
+        console.log(`'${movie.title}' deleted from favorites`);
       })
       .catch((err) => {
         console.error(err);
