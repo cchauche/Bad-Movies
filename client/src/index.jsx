@@ -273,6 +273,12 @@ class App extends React.Component {
     this.saveMovie = this.saveMovie.bind(this);
     this.deleteMovie = this.deleteMovie.bind(this);
     this.getMovies = this.getMovies.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+  }
+
+  // todo: add a lifecycle function for componentDidMount that loads favorites
+  componentDidMount() {
+    // Get the favorites from DB
   }
 
   getMovies(genreId) {
@@ -290,14 +296,20 @@ class App extends React.Component {
       });
   }
 
+  // todo: create function that retrieves all favorites from db
+  getFavorites() {
+    //Get favorites from database
+  }
+
   saveMovie(movieIndex) {
+    //todo: modify so after succesfully adding a movie it adds that movie to favorites
     // same as above but do something diff
     console.log("Saving a movie...");
     let movie = this.state.movies[movieIndex];
     axios
       .post("http://localhost:3000/movies/save", movie)
       .then(() => {
-        console.log(`${movie.title} saved to favorites`);
+        console.log(`'${movie.title}' saved to favorites`);
       })
       .catch((err) => {
         console.error(err);
@@ -306,6 +318,7 @@ class App extends React.Component {
 
   deleteMovie(movieId) {
     // same as above but do something diff
+    //todo: modify so after succesfully deleting a movie it removes that movie from favorites
     console.log("Deleting a movie...");
     axios
       .delete("http://localhost:3000/movies/delete/" + movieId)
