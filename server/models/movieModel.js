@@ -83,9 +83,17 @@ module.exports = {
 
   deleteFavorite: (movieId, callback) => {
     // Delete a movie from favorites
+    FavoriteModel.deleteOne({id:movieId}, (err) => {
+      if (err) return callback(err);
+      callback(null);
+    })
   },
 
   getFavorites: (callback) => {
     // Get all the favorites
+    FavoriteModel.find({},'-_id -__v',(err, favorites) => {
+      if (err) return callback(err);
+      callback(null, favorites);
+    })
   },
 };
